@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-base;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-5 py-3 rounded-xl bg-light-accent dark:bg-dark-accent text-white
+           font-medium transition-all duration-300 hover:bg-light-accent/90 dark:hover:bg-dark-accent/90 
+           active:scale-95 shadow-md hover:shadow-hover focus:outline-none focus:ring-2 
+           focus:ring-light-accent/50 dark:focus:ring-dark-accent/50 sm:text-sm md:text-base;
+  }
+  
+  .btn-secondary {
+    @apply px-5 py-3 rounded-xl border border-light-border dark:border-dark-border
+           text-light-text dark:text-dark-text font-medium bg-white dark:bg-dark-bg/30
+           transition-all duration-300 hover:bg-light-border/10 dark:hover:bg-dark-border/20
+           active:scale-95 focus:outline-none focus:ring-2 focus:ring-light-accent/30 
+           dark:focus:ring-dark-accent/30 sm:text-sm md:text-base;
+  }
+
+  .btn-icon {
+    @apply p-3 rounded-full flex items-center justify-center transition-all duration-300
+           hover:bg-light-border/20 dark:hover:bg-dark-border/30 active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-light-accent/30 dark:focus:ring-dark-accent/30;
+  }
+
+  .input-primary {
+    @apply w-full px-5 py-3 rounded-xl border border-light-border dark:border-dark-border
+           bg-white dark:bg-dark-bg/50 focus:outline-none focus:ring-2 focus:ring-light-accent/50
+           dark:focus:ring-dark-accent/50 transition-all duration-300 placeholder:text-gray-400
+           dark:placeholder:text-gray-600 sm:text-sm md:text-base;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-dark-bg border border-light-border dark:border-dark-border
+           rounded-2xl shadow-soft hover:shadow-hover transition-all duration-300;
+  }
+  
+  .badge {
+    @apply px-3 py-1 text-xs font-semibold rounded-full inline-flex items-center justify-center;
+  }
+}
+
+.skeleton {
+  @apply animate-pulse bg-light-border/20 dark:bg-dark-border/20 rounded-xl;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 640px) {
+  .btn-primary, .btn-secondary {
+    @apply px-4 py-2.5 text-sm;
+  }
+  
+  .input-primary {
+    @apply px-4 py-2.5 text-sm;
+  }
+}
