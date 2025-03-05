@@ -4,7 +4,7 @@ import { X, Plus, Minus, ShoppingBag, CreditCard, ArrowLeft, Trash2, CheckCircle
 import { useStore } from "../store/useStore";
 
 const Cart = () => {
-  const { cart, removeFromCart, updateQuantity, isCartOpen, setIsCartOpen } = useStore();
+  const { cart, removeFromCart, updateQuantity, isCartOpen, setIsCartOpen, resetAllFilters } = useStore();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
@@ -24,15 +24,17 @@ const Cart = () => {
       setIsCartOpen(false);
     }, 2000);
   };
-
+  const handleRefresh = () => {
+ 
+    window.location.reload();
+  };
   const handleBackToCart = () => {
     setIsCheckingOut(false);
   };
 
   const handleCloseCart = () => {
     setIsCartOpen(false);
-    setIsCheckingOut(false);
-    setPaymentSuccess(false);
+    resetAllFilters();
   };
 
   return (
@@ -300,12 +302,7 @@ const Cart = () => {
                   Seu pedido foi processado com sucesso.
                 </p>
                 <motion.button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setPaymentSuccess(false);
-                    setIsCheckingOut(false);
-                    setIsCartOpen(false);
-                  }}
+                  onClick={(e) => { handleRefresh();}}
                   className="px-6 py-3 bg-light-accent dark:bg-red-600 text-white rounded-lg font-medium"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

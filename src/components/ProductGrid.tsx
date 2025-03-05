@@ -44,7 +44,7 @@ const products: Product[] = [
     description: 'Projetado em conjunto com a marca de streetwear com sede em Londres, o Corteiz x Nike Air Max 95 SP',
     image: 'https://acdn.mitiendanube.com/stores/002/944/067/products/design-sem-nome-6730f409e81e31e6bb17188064430060-1024-1024.webp',
     category: 'men',
-    rating: 4.6,
+    rating: 3.7,
     sizes: ['XS', 'S', 'M', 'L'],
     colors: ['blue', 'red', 'white']
   },
@@ -110,9 +110,9 @@ const products: Product[] = [
   
 ];
 
-// Corrigindo a interface de filtros para corresponder ao tipo Filter do store
+
 interface Filters {
-  priceRange: [number, number]; // Array de dois números [min, max]
+  priceRange: [number, number]; 
   rating: number | null;
   category: string[];
 }
@@ -146,9 +146,9 @@ const ProductGrid = () => {
     category: []
   };
 
-  // Corrigindo a função de inicialização de filtros
+
   useEffect(() => {
-    // Inicializar filtros
+
     setFilters({
       priceRange: [0, 1000],
       rating: 0,
@@ -165,6 +165,9 @@ const ProductGrid = () => {
 
   // Corrigindo a lógica de filtragem
   const filteredProducts = products.filter(product => {
+    // Filtro de categoria
+    if (selectedCategory !== 'all' && product.category !== selectedCategory) return false;
+    
     // Filtro de preço
     if (product.price > priceRange) return false;
     
@@ -173,6 +176,9 @@ const ProductGrid = () => {
     
     // Filtro de tamanho
     if (selectedSize && !product.sizes.includes(selectedSize)) return false;
+    
+    // Filtro de busca
+    if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     
     return true;
   });
@@ -216,6 +222,8 @@ const ProductGrid = () => {
   const handleSizeSelect = (size: string) => {
     setSelectedSize(prevSize => prevSize === size ? null : size);
   };
+
+
 
   return (
     <>
@@ -270,6 +278,8 @@ const ProductGrid = () => {
       {/* Filtros e ordenação */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2 md:gap-3">
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+      
+
           <motion.button
             onClick={() => setShowFilters(!showFilters)}
             className="flex items-center space-x-1 md:space-x-2 py-2 px-3 rounded-lg bg-white/90 dark:bg-dark-secondary/90 border border-light-border dark:border-dark-border text-xs sm:text-sm"
@@ -336,25 +346,7 @@ const ProductGrid = () => {
                 </div>
               </div>
 
-              {/* Filtro de tamanho */}
-              <div>
-                <h3 className="text-sm md:text-base font-medium mb-2 sm:mb-3">Tamanho</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['P', 'M', 'G', 'GG'].map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => handleSizeSelect(size)}
-                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm border ${
-                        selectedSize === size
-                          ? 'bg-light-accent dark:bg-dark-accent text-white border-light-accent dark:border-dark-accent'
-                          : 'bg-white dark:bg-dark-bg border-light-border dark:border-dark-border'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
+             
 
               {/* Filtro de avaliação */}
               <div>
